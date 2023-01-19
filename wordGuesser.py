@@ -16,7 +16,7 @@ def playAgain(ans):
 def exitFunc():
     print()
     print("Goodbye!")
-    print("Word guesser game made by Ivaylo Georgiev.")
+    print("Hangman made by Ivaylo Georgiev.")
     exit()
 
 
