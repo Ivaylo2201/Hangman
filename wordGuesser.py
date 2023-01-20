@@ -13,18 +13,21 @@ def playAgain(ans):
         return False
 
 
+# Exit function
 def exitFunc():
     print()
     print("Goodbye!")
-    print("Hangman made by Ivaylo Georgiev.")
+    print("Word guesser game made by Ivaylo Georgiev.")
     exit()
 
 
 # Defining the possible words, the valid letters and 2 empty lists for future use.
 wordsList = ["coin", "dog", "rose", "car", "climate", "bread", "earth", "friend", "fruit", "gold", "hotel", "juice",
              "lemon", "minute", "nature", "plane", "train", "space", "star", "air", "sound", "software", "art", "sun"
-             "relax", "rich", "zebra", "bird", "sale", "twice", "wealth", "weather", "volume", "grass", "kiss", "look",
-             "truck", "odd", "plant", "smartphone", "monitor", "bottle", "barrier", "doctor", "egg", "fitness", "minister"]
+                                                                                                                "relax",
+             "rich", "zebra", "bird", "sale", "twice", "wealth", "weather", "volume", "grass", "kiss", "look",
+             "truck", "odd", "plant", "smartphone", "monitor", "bottle", "barrier", "doctor", "egg", "fitness",
+             "minister"]
 
 validLetters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
                 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x',
@@ -34,19 +37,18 @@ usedLetters = []
 wordList = []
 
 while True:
+    # Defining the attempts.
     attempts = 10
-    # Generating one random number from 0 to the length of wordsList.
-    randomNum = random.randint(0, len(wordsList) - 1)
 
-    # Taking away the word on the generated number.
-    randomWord = wordsList[randomNum]
+    # Selecting a random word.
+    randomWord = random.choice(wordsList)
 
-    # Putting '*' instead of the length of the word.
+    # Visualising the word as '*' in a list.
     for _ in range(len(randomWord)):
         wordList.append('*')
     print()
 
-    # Printing the number of letters in the word without revealing them.
+    # Visualising the word as '*' on the console.
     print('* ' * len(randomWord))
 
     while True:
@@ -100,7 +102,7 @@ while True:
                 else:
                     exitFunc()
         else:
-            # Take out 1 of the attempts, save the letter and print the remaining attempts.
+            # Taking out 1 attempt, saving the letter and printing the remaining attempts.
             attempts -= 1
             usedLetters.append(letter)
             if attempts > 0:
