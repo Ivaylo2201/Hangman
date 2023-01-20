@@ -1,31 +1,21 @@
-# Importing random library for future use.
 import random
 
 
-# Defining a function to check if the user wants to play again.
-def playAgain(ans):
-    usedLetters.clear()
-    wordList.clear()
-
-    if ans.lower() == "yes":
+# Game restart
+def newGame(userAnswer):
+    if userAnswer.capitalize().strip() == "Yes":
+        wordList.clear()
+        usedLetters.clear()
+        print()
         return True
-    elif ans.lower() == "no":
-        return False
-
-
-# Exit function
-def exitFunc():
-    print()
-    print("Goodbye!")
-    print("Word guesser game made by Ivaylo Georgiev.")
-    exit()
+    else:
+        exit()
 
 
 # Defining the possible words, the valid letters and 2 empty lists for future use.
 wordsList = ["coin", "dog", "rose", "car", "climate", "bread", "earth", "friend", "fruit", "gold", "hotel", "juice",
              "lemon", "minute", "nature", "plane", "train", "space", "star", "air", "sound", "software", "art", "sun"
-                                                                                                                "relax",
-             "rich", "zebra", "bird", "sale", "twice", "wealth", "weather", "volume", "grass", "kiss", "look",
+             "relax", "zebra", "bird", "sale", "twice", "wealth", "weather", "volume", "grass", "kiss", "look", "rich",
              "truck", "odd", "plant", "smartphone", "monitor", "bottle", "barrier", "doctor", "egg", "fitness",
              "minister"]
 
@@ -37,19 +27,13 @@ usedLetters = []
 wordList = []
 
 while True:
-    # Defining the attempts.
     attempts = 10
-
-    # Selecting a random word.
     randomWord = random.choice(wordsList)
 
-    # Visualising the word as '*' in a list.
     for _ in range(len(randomWord)):
         wordList.append('*')
-    print()
 
-    # Visualising the word as '*' on the console.
-    print('* ' * len(randomWord))
+    print(' '.join(wordList))
 
     while True:
         # Checking if the user has reached the limit of attempts.
@@ -57,13 +41,10 @@ while True:
             print(f"You ran out of attempts! The word was '{randomWord}'!")
             print()
 
-            x = input("Do you want to play again? [Yes / No] -> ")
-            if playAgain(x):
+            playAgain = input("Type 'Yes' to play again: ")
+            if newGame(playAgain):
                 break
-            else:
-                exitFunc()
 
-        # Asking the user for a letter.
         letter = input("Guess a letter: ")
 
         # Replace '*' with all instances of the letter if found.
@@ -71,17 +52,9 @@ while True:
             if randomWord[i] == letter:
                 wordList[i] = letter
 
-        # Checking if the input is valid
-        if letter not in validLetters or letter in usedLetters:
-            print("Invalid letter or already used!")
-            print()
-            continue
-
-        # Checking if the prompted letter is in the selected word.
+        # Checking if the passed letter is in the selected word.
         if letter in randomWord:
-            # Saving the letter, so the user can not use it again.
             usedLetters.append(letter)
-
             ind = randomWord.index(letter)
             wordList[ind] = letter
 
@@ -95,14 +68,10 @@ while True:
                 print(f"It was: '{guessedWord}'")
                 print()
 
-                # Asking the user whether they want to play again.
-                x = input("Do you want to play again? [Yes / No] -> ")
-                if playAgain(x):
+                playAgain = input("Type 'Yes' to play again: ")
+                if newGame(playAgain):
                     break
-                else:
-                    exitFunc()
         else:
-            # Taking out 1 attempt, saving the letter and printing the remaining attempts.
             attempts -= 1
             usedLetters.append(letter)
             if attempts > 0:
