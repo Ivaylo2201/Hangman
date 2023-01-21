@@ -47,6 +47,11 @@ while True:
 
         letter = input("Guess a letter: ")
 
+        if letter not in validLetters or letter in usedLetters:
+            print("Invalid letter or already used!")
+            print()
+            continue
+
         # Replace '*' with all instances of the letter if found.
         for i in range(len(randomWord)):
             if randomWord[i] == letter:
